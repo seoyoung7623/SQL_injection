@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.catholic.mapper.AccountMapper">
+
+
+    <insert id="insertAccount" parameterType="Account">
+        INSERT INTO user
+        VALUES
+        (#{id}, #{password})
+    </insert>
+
+    <select id="getAccount" resultType="Account">
+        SELECT * FROM user
+        WHERE id=#{id}
+        LIMIT 1
+    </select>
+
+    <select id="getAccountList" resultType="Account">
+        SELECT * FROM user ORDER BY id DESC
+    </select>
+
+    <select id="sqlInjection" parameterType="map" resultType="Account">
+        SELECT * FROM user
+        WHERE id='${id}' AND password='${password}'
+    </select>
+
+    <select id="sqlInjectionSol" resultType="Account">
+        SELECT * FROM user
+        WHERE id=#{id} AND password=#{password}
+    </select>
+</mapper>
